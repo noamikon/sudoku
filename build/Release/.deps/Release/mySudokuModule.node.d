@@ -1,0 +1,1 @@
+cmd_Release/mySudokuModule.node := ln -f "Release/obj.target/mySudokuModule.node" "Release/mySudokuModule.node" 2>/dev/null || (rm -rf "Release/mySudokuModule.node" && cp -af "Release/obj.target/mySudokuModule.node" "Release/mySudokuModule.node")

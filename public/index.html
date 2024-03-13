@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudoku Solver</title>
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <!-- <style>
+    .sudoku-grid {
+      display: grid;
+      grid-template-columns: repeat(9, 50px);
+      grid-gap: 1px
+    }
+    .sudoku-cell {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+      font-size: 20px;
+    }
+  </style> -->
+</head>
+<body>
+  <h2>Sudoku Solver</h2>
+  <!-- <form action="/upload" method="post" enctype="multipart/form-data">
+  </form> -->
+  <script src="/js/script.js"></script>
+    <input type="file" name="sudokuImage" />
+    <!-- <button type="submit">Solve Sudoku</button> -->
+    <button onclick="uploadImage()">Upload Sudoku</button>
+
+  <div id="sudoku-grid" class="sudoku-grid">
+    <!-- Initially empty, to be filled dynamically -->
+  </div>
+  <!-- <script>
+    const form = document.querySelector('form');
+    const sudokuGrid = document.getElementById('sudoku-grid');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      fetch('/upload', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        const { solution } = data;
+        sudokuGrid.innerHTML = ''; // Clear existing grid
+        solution.forEach(row => {
+          row.forEach(value => {
+            const cell = document.createElement('div');
+            cell.className = 'sudoku-cell';
+            cell.textContent = value != 0 ? value : ''; // Display numbers, leave zeros as blank
+            sudokuGrid.appendChild(cell);
+          })
+        })
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      })
+    })
+  </script> -->
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Sudoku Image</title>
+</head>
+<body>
+  <form action="http://localhost:3000/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="sudokuImage" />
+    <input type="submit" value="Upload Image" />
+  </form>
+</body>
+</html> -->
