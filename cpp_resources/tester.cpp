@@ -4,8 +4,8 @@
 
 int main()
 {
-    std::string srcPath = "./uploads/BWSudoku.png";
-    std::string dstPath = "./uploads/BWSudokuwithZeros.png";
+    std::string srcPath = "../uploads/Sudoku2.png";
+    std::string dstPath = "../uploads/Sudoku2withZeros.png";
 
     FillSudokuWithZeros(srcPath, dstPath);
 

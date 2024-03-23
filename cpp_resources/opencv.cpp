@@ -41,6 +41,20 @@ void CannyImage(Mat& imgSrc, Mat& imgDst)
     Canny(imgSrc, imgDst, 50, 150);                         // Apply Canny edge detection
 }
 
+void AddContrast(Mat& imgSrc, Mat& imgDst, double alpha, int beta)
+{
+    for (int y = 0; y < imgSrc.rows; y++)
+    {
+        for (int x = 0; x < imgSrc.cols; x++)
+        {
+            for (int c = 0; c < imgSrc.channels(); c++)
+            {
+                imgDst.at<Vec3b>(y, x)[c] = saturate_cast<uchar>(alpha * imgSrc.at<Vec3b>(y, x)[c] + beta);
+            }
+        }
+    }
+}
+
 void DilateImage(Mat& imgSrc, Mat& imgDst, int kernelSize)
 {
     Mat kernel = getStructuringElement(MORPH_RECT, Size(kernelSize, kernelSize));
@@ -79,8 +93,12 @@ bool isSquareEmpty(Mat& square)
     double nonZeroCount = countNonZero(imgThresh);
     // Define a threshold for what counts as "empty"
     double area = square.rows * square.cols;
-    double emptyThreshold = area * 0.08; // 10% of the area, adjust as needed
+    double emptyThreshold = area * 0.10; // 10% of the area, adjust as needed
 
+    /* std::cout << "Area: " << area << std::endl;
+    std::cout << "Non-zero count: " << nonZeroCount << std::endl;
+    std::string isEmpty = area - nonZeroCount < emptyThreshold ? "empty" : "not empty";
+    std::cout << "square is " << isEmpty << std::endl; */
     return area - nonZeroCount < emptyThreshold;
 }
 
@@ -124,7 +142,7 @@ void GetContours(Mat& imgSrc, Mat& imgDst)
         {
             // Point center = Point(bbox.x + bbox.width / 2, bbox.y + bbox.height / 2);
             Point textOrg((bbox.x + bbox.width / 2), (bbox.y + bbox.height / 2));
-            // drawContours(imgDst, sortedContours, i, Scalar(255, 0, 255), 2);
+            //drawContours(imgDst, sortedContours, i, Scalar(255, 0, 255), 2);
             String text = "0";
             int FontFace = FONT_HERSHEY_SIMPLEX;
             double fontScale = bbox.width / 33.0;
@@ -138,6 +156,7 @@ void GetContours(Mat& imgSrc, Mat& imgDst)
 
             putText(imgDst, text, textOrg, FontFace, fontScale, Scalar(0, 0, 0), thickness);
         }
+        // drawContours(imgDst, sortedContours, i, Scalar(255, 0, 255), 2);
         // ShowImage(imgDst);
     }
 }
@@ -168,8 +187,10 @@ void FillSudokuWithZeros(std::string srcPath, std::string dstPath)
     CannyImage(imgGray, imgCanny);
     DilateImage(imgCanny, imgDilate, 2);
     GetContours(imgDilate, img);
+    Mat imgContrasted = Mat::zeros( img.size(), img.type() );
+    AddContrast(img, imgContrasted, 2.0, 0);
 
-    SaveImage(dstPath, img);
+    SaveImage(dstPath, imgContrasted);
 }
 
 

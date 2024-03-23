@@ -339,7 +339,7 @@ endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
 cmd_regen_makefile = cd $(srcdir); /home/parallels/.nvm/versions/node/v16.20.2/lib/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/home/parallels/.cache/node-gyp/16.20.2" "-Dnode_gyp_dir=/home/parallels/.nvm/versions/node/v16.20.2/lib/node_modules/node-gyp" "-Dnode_lib_file=/home/parallels/.cache/node-gyp/16.20.2/<(target_arch)/node.lib" "-Dmodule_root_dir=/home/parallels/Documents/nodejs/sudoku-solver" "-Dnode_engine=v8" "--depth=." "-Goutput_dir=." "--generator-output=build" -I/home/parallels/Documents/nodejs/sudoku-solver/build/config.gypi -I/home/parallels/.nvm/versions/node/v16.20.2/lib/node_modules/node-gyp/addon.gypi -I/home/parallels/.cache/node-gyp/16.20.2/include/node/common.gypi "--toplevel-dir=." binding.gyp
-Makefile: $(srcdir)/../../../.cache/node-gyp/16.20.2/include/node/common.gypi $(srcdir)/../../../.nvm/versions/node/v16.20.2/lib/node_modules/node-gyp/addon.gypi $(srcdir)/binding.gyp $(srcdir)/build/config.gypi
+Makefile: $(srcdir)/../../../.nvm/versions/node/v16.20.2/lib/node_modules/node-gyp/addon.gypi $(srcdir)/../../../.cache/node-gyp/16.20.2/include/node/common.gypi $(srcdir)/binding.gyp $(srcdir)/build/config.gypi
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included

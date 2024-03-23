@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', generateEmptyGrid)
 
 function uploadImage() {
     const imageInput = document.getElementById('sudokuImage');
+    console.dir(imageInput);
     if (imageInput.files.length === 0) {
         alert('Please select an image first!');
         return;
